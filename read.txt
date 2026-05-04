@@ -1,0 +1,21 @@
+--For CPU-only usage
+pip install onnxruntime
+
+--For GPU acceleration (CUDA)
+pip install onnxruntime-gpu
+
+pip install python-multipart
+
+#---
+uvicorn main:app --reload
+
+-> http://127.0.0.1:8000/docs
+
+
+#---
+git init
+git lfs install
+git lfs track "*.onnx"
+git add .gitattributes
+git add .
+git commit -m "initial commit with lfs"
