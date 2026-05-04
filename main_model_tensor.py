@@ -6,9 +6,19 @@ import io
 from contextlib import asynccontextmanager
 import os
 
-ONNX_MODEL_PATH = "vit-model.onnx"
+# ONNX_MODEL_PATH = "vit-model.onnx"
 
-ort_session = None
+
+# Cách này giúp Python xác định chính xác vị trí file .onnx ở đâu 
+# thì file .data cũng phải nằm ở đó.
+current_dir = os.path.dirname(os.path.abspath(__file__))
+ONNX_MODEL_PATH = os.path.join(current_dir, "vit_classification.onnx")
+
+# Khi chạy dòng này, nó sẽ tự động "nhìn" sang file .data bên cạnh.
+ort_session = ort.InferenceSession(ONNX_MODEL_PATH)
+
+
+# ort_session = None
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):

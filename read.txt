@@ -6,8 +6,11 @@ pip install onnxruntime-gpu
 
 pip install python-multipart
 
-#---
+#--- chay cua vit-model.onnx
 uvicorn main:app --reload
+
+#--- chay cua vit_classification.onnx va vit_classification.onnx.data
+uvicorn main_model_tensor:app --reload
 
 -> http://127.0.0.1:8000/docs
 
@@ -19,3 +22,11 @@ git lfs track "*.onnx"
 git add .gitattributes
 git add .
 git commit -m "initial commit with lfs"
+
+git reset --soft origin/main
+git lfs track "*.data"
+git add .gitattributes
+git add .
+git commit -m "fix: finally tracking .data file with lfs"
+git lfs ls-files
+git push
